@@ -17,7 +17,8 @@ body{
 	height: 100vh;
 	overflow: hidden;
 	text-align: center;
-	background-color: orange;
+	background-color: black;
+	color: white;
 	font-size: 1.5em;
 }
 
@@ -29,7 +30,7 @@ body{
 }
 
 #projectAdd {
-	color: red;
+	color: white;
 	transition: 1s all;
 }
 
@@ -41,9 +42,22 @@ body{
 .projectName{
 	margin: 10px;
 }
+
+#taskDiv {
+	width: 100%;
+}
 .task{
-	border: 1px solid black;
-	display: inline-block;
+	margin: auto;
+	padding: 10px;
+	border-top: 1px solid black;
+	width: 80%;
+	margin-top: 5px;
+	text-align: center;
+	position: relative;
+}
+
+.task *{
+	margin: 10px;
 }
 
 .projectName:hover{
@@ -55,7 +69,8 @@ body{
 	z-index: 1;
 	width: 100%;
 	height: 0px;
-	background-color: red;
+	background-color: white;
+	color: black;
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 	transition: all 1s;
@@ -65,13 +80,52 @@ body{
 }
 
 .formInput {
+	width: 80%;
 	padding: 0px;
 	height: 0px;
-	border: 0;
+	border: 1px solid black;
 	transition: all 1s;
 }
 
 .addButton {
 	opacity: 0;
 	transition: all 0.5s;
+}
+
+.finished{
+	opacity: 0.5;
+	color: gray;
+	border-top: 1px solid gray;
+}
+
+.dueDate{
+
+}
+
+.priority{
+}
+
+.isDone{
+	
+}
+
+.smallInfo{
+	display: inline-block;
+	margin-right: 20px;
+}	
+
+.fa-times{
+	position: absolute;
+	top: 0;
+	right: 3px;
+}
+
+.fa-check{
+	position: absolute;
+	top: 20%;
+	right: 0;
+}
+
+.fas{
+	cursor: pointer;
 }
