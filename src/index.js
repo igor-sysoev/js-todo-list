@@ -5,21 +5,3 @@ import eventModule from './modules/eventcontroller'
 
 eventModule.init();
 
-const test = document.querySelector('#testbutan')
-
-test.addEventListener('click', function(){
-	eventModule.buildProject('New ons')
-	domModule.renderAll();
-	console.log(projectModule.projects)
-})
-// const formBuilder = (function(){
-// 	const buildTaskForm = () => {
-// 		let taskForm = document.createElement('div')
-// 		taskForm.classList.add('modal')
-// 		document.body.appendChild(taskForm)
-// 	}
-
-// 	return{buildTaskForm}
-
-// })()
-

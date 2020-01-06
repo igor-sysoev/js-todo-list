@@ -11,6 +11,8 @@ const projectModule = (function(){
 		return {title, tasks}
 	}
 
+
+
 	return {
 			projectConstructor,
 			projects,

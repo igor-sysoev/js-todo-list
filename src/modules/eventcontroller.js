@@ -15,22 +15,42 @@ const eventModule = (function(){
 			projectModule.currentProject.tasks.push(newTask)
 		}
 
-		const switchProject = (target) => {
-		let thisProject = projectModule.projects.filter(project => project.title == target.innerText)[0]
-		console.log(thisProject)
-		console.log(projectModule)
-		projectModule.setCurrentProject(thisProject)
-	}
 
-		const init = () => {
+		const switchProject = (target) => {
+			let thisProject = projectModule.projects.filter(project => project.title == target.innerText)[0]
+			projectModule.setCurrentProject(thisProject)
+		}
+
+		const toggleTaskStatus = (currentTask) => {
+			switch(currentTask.isFinished){
+				case true:
+				taskModule.unfinishTask(currentTask)
+				break;
+				case false:
+				taskModule.finishTask(currentTask)
+			}
+		}
+
+		const buildDefaultProjects = () => {
 			eventModule.buildProject('Test empty');
-			eventModule.buildTask('Sleep', 'Get a good night of sleep', '25.01.2001', 'Low')
+			eventModule.buildTask('Sleep', 'Get a good night of sleep', '25.01.2001', 'Low', true)
 
 			eventModule.buildProject('New Project');
 
-			eventModule.buildTask('Clean da dishez', 'clean dishes after the party', '24.01.2001', 'High')
-			eventModule.buildTask('Work out', 'Do a few excercises from my program', '5.02.2001', 'Medium')
-			eventModule.buildTask('Sleep', 'Get a good night of sleep', '25.01.2001', 'Low')
+			eventModule.buildTask('Clean the dishes', 'clean dishes after the party', '15.01.2020', 'High')
+			eventModule.buildTask('Work out', 'Do a few excercises from my program', '15.01.2020', 'Medium')
+			eventModule.buildTask('Sleep', 'Get a good night of sleep', '25.01.2020', 'Low')
+		}
+		const updateLocalStorage = () => {
+			localStorage.setItem('localProjects', JSON.stringify(projectModule.projects))
+		}
+
+		const init = () => {
+			if(localStorage.getItem('localProjects')){
+				projectModule.projects = JSON.parse(localStorage.getItem('localProjects'));
+				console.log(projectModule.projects)
+				projectModule.setCurrentProject(projectModule.projects[0])
+			}else buildDefaultProjects()
 
 			domModule.renderAll()
 		}
@@ -39,6 +59,8 @@ const eventModule = (function(){
 		buildTask,
 		init,
 		switchProject,
+		toggleTaskStatus,
+		updateLocalStorage,
 	}
 })()
 
