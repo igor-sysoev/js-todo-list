@@ -43,15 +43,15 @@ const eventModule = (function(){
 		}
 		const updateLocalStorage = () => {
 			localStorage.setItem('localProjects', JSON.stringify(projectModule.projects))
+			localStorage.setItem('currentProject', JSON.stringify(projectModule.currentProject))
 		}
 
+		const startFromLocalStorage = () => {
+			projectModule.projects = JSON.parse(localStorage.getItem('localProjects'));
+			projectModule.currentProject = JSON.parse(localStorage.getItem('currentProject'))
+		}
 		const init = () => {
-			if(localStorage.getItem('localProjects')){
-				projectModule.projects = JSON.parse(localStorage.getItem('localProjects'));
-				console.log(projectModule.projects)
-				projectModule.setCurrentProject(projectModule.projects[0])
-			}else buildDefaultProjects()
-
+			buildDefaultProjects()
 			domModule.renderAll()
 		}
 	return {
@@ -65,3 +65,6 @@ const eventModule = (function(){
 })()
 
 export default eventModule 
+
+//if(localStorage.getItem('localProjects')) startFromLocalStorage()
+			//else 

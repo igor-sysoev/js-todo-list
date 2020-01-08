@@ -7,13 +7,25 @@
 }
 
 body{
-	display: flex;
 	font-family: 'Fira Sans Extra Condensed', sans-serif;
+	background: black;
+	color: white;
+	overflow-y: hidden;
 }
 
+
+.container{
+
+	display: flex;
+	justify-content: center;
+	width: 70%;
+	margin: 50px auto;
+}
 #projectDiv{
-	width: 20%;
-	border-right: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+	border-right: 1px solid white;
 	height: 100vh;
 	overflow: hidden;
 	text-align: center;
@@ -29,6 +41,16 @@ body{
 	margin: 15px;
 }
 
+.nameDiv {
+	display: flex;
+	align-items: baseline;
+	justify-content: flex-end;
+}
+
+.nameDiv i {
+	margin: 10px;
+	font-size: 0.7em;
+}
 #projectAdd {
 	color: white;
 	transition: 1s all;
@@ -40,16 +62,27 @@ body{
 }
 
 .projectName{
-	margin: 10px;
+	margin-top: 15px;
+
 }
 
 #taskDiv {
 	width: 100%;
+
+}
+
+.taskAdd {
+
+	border: 0;
+	align-self: flex-end;
+	padding: 10px 20px;
+	margin: 10px;
+	
 }
 .task{
 	margin: auto;
 	padding: 10px;
-	border-top: 1px solid black;
+	border-top: 1px solid white;
 	width: 80%;
 	margin-top: 5px;
 	text-align: center;
@@ -61,7 +94,7 @@ body{
 }
 
 .projectName:hover{
-	color: red;
+	color: orange;
 	cursor: pointer;
 }
 
@@ -71,8 +104,6 @@ body{
 	height: 0px;
 	background-color: white;
 	color: black;
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
 	transition: all 1s;
 	display: flex;
 	align-items: center;
@@ -93,9 +124,12 @@ body{
 }
 
 .finished{
-	opacity: 0.5;
 	color: gray;
 	border-top: 1px solid gray;
+}
+
+.finished h3, .finished p{
+ text-decoration: line-through;
 }
 
 .dueDate{
@@ -122,10 +156,20 @@ body{
 
 .fa-check{
 	position: absolute;
-	top: 20%;
+	top: 15px;
 	right: 0;
 }
 
 .fas{
 	cursor: pointer;
+}
+
+.hideable{
+
+}
+
+.expandIcon{
+	position: absolute;
+	top: 0;
+	left: 0;
 }

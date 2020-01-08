@@ -11,12 +11,20 @@ const projectModule = (function(){
 		return {title, tasks}
 	}
 
+	const deleteProject = (project) => {
+		let projectId = projectModule.projects.indexOf(project);
+		projectModule.projects.splice(projectId, 1)
+	}
 
-
+	const checkIfNameExists = (name) => {
+		 return projects.some(project => project.title == name)
+	}
 	return {
 			projectConstructor,
 			projects,
-			setCurrentProject
+			setCurrentProject,
+			deleteProject,
+			checkIfNameExists,
 		}
 })()
 

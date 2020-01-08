@@ -1,8 +1,8 @@
 import projectModule from './projects'
 const taskModule = (function(){
 	
-	const taskConstructor = (title, description, dueDate, priority, isFinished = false) => {
-		return{title, description, dueDate, priority, isFinished}
+	const taskConstructor = (title, description, dueDate, priority, isFinished = false, hidden = true) => {
+		return{title, description, dueDate, priority, isFinished, hidden}
 	}
 
 	const deleteTask = (task) => {
