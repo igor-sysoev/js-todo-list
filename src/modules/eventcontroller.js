@@ -56,7 +56,8 @@ const eventModule = (function(){
 			projectModule.currentProject = JSON.parse(localStorage.getItem('currentProject'))
 		}
 		const init = () => {
-			buildDefaultProjects()
+			if(localStorage.getItem('localProjects')) startFromLocalStorage()
+			else buildDefaultProjects()
 			domModule.renderAll()
 		}
 	return {
