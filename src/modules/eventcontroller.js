@@ -15,6 +15,14 @@ const eventModule = (function(){
 			projectModule.currentProject.tasks.push(newTask)
 		}
 
+		const getFormValues = (formDiv) => {
+			const inputs = formDiv.querySelectorAll('input')
+			const selects = formDiv.querySelectorAll('select')
+			const valArr = []
+			inputs.forEach(input => valArr.push(input.value))
+			selects.forEach(select => valArr.push(select.value))
+			return valArr
+		}
 
 		const switchProject = (target) => {
 			let thisProject = projectModule.projects.filter(project => project.title == target.innerText)[0]
@@ -32,14 +40,11 @@ const eventModule = (function(){
 		}
 
 		const buildDefaultProjects = () => {
-			eventModule.buildProject('Test empty');
-			eventModule.buildTask('Sleep', 'Get a good night of sleep', '25.01.2001', 'Low', true)
-
-			eventModule.buildProject('New Project');
-
-			eventModule.buildTask('Clean the dishes', 'clean dishes after the party', '15.01.2020', 'High')
-			eventModule.buildTask('Work out', 'Do a few excercises from my program', '15.01.2020', 'Medium')
-			eventModule.buildTask('Sleep', 'Get a good night of sleep', '25.01.2020', 'Low')
+			eventModule.buildProject('Learn To do It!');
+			eventModule.buildTask('Build a new task', 'Press the cross near the Projects heading to add your first task!', 'Now', 'High')
+			eventModule.buildTask('Build a new Project', 'Press the folder near the Projects heading to add your first project!', 'Now', 'High')
+			eventModule.buildTask('Finish a task', 'Get that finished! Press the checkmark to mark your work done! Dont worry, your progress is saved, so you can track all your finished tasks!', 'Now', 'High')
+			eventModule.buildTask('Give up!', 'Lets admit it; you were never going to make it in the first place. Press the cross near your task to delete the task and the shame that comes with giving up!', 'Now', 'High')
 		}
 		const updateLocalStorage = () => {
 			localStorage.setItem('localProjects', JSON.stringify(projectModule.projects))
@@ -61,6 +66,7 @@ const eventModule = (function(){
 		switchProject,
 		toggleTaskStatus,
 		updateLocalStorage,
+		getFormValues,
 	}
 })()
 

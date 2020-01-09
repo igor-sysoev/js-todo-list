@@ -5,9 +5,12 @@ const domModule = (function(){
 
 	const projectDiv = document.querySelector('#projectDiv')
 	const taskDiv = document.querySelector('#taskDiv')
-	const projectForm = document.querySelector('.modal')
-	const formButton = document.querySelector('.addButton')
-	const titleInput = document.querySelector('.formInput')
+
+	const projectForm = document.querySelector('#projectForm')
+	const taskForm = document.querySelector('#taskForm')
+
+	const projectFormButton = document.querySelector('.projectAddButton')
+	const taskFormButton = document.querySelector('.taskAddButton')
 
 	const projectButton = document.querySelector('#projectAdd')
 	const taskButton = document.querySelector('#taskAdd')
@@ -24,18 +27,29 @@ const domModule = (function(){
 			}
 		}
 
-	const openProjectForm = () => {
-		projectForm.style.height = '100px'
-		titleInput.style.height = '10px'
-		titleInput.style.padding = '15px 10px'
-		formButton.style.opacity = '100'
+	const openForm = (formDiv, inputClass, button, height = '100px') => {
+		const inputs = formDiv.querySelectorAll(inputClass)
+		inputs.forEach(input => {
+			input.style.display = 'block'
+			setTimeout(function(){
+				input.style.height = '10px'
+				input.style.padding = '15px 10px'
+			}, 200)
+			
+		})
+		formDiv.style.height = height
+		button.style.opacity = '100'
 	}
 
-	const closeProjectForm = () => {
-		projectForm.style.height = '0px'
-		titleInput.style.height = '0px'
-		titleInput.style.padding = '0'
-		formButton.style.opacity = '0'
+	const closeForm = (formDiv, inputClass, button) => {
+		const inputs = formDiv.querySelectorAll(inputClass)
+		inputs.forEach(input => {
+			input.style.height = '0px'
+			input.style.padding = '0'
+			setTimeout(function(){input.style.display = 'none'}, 50)
+		})
+		formDiv.style.height = '0px'
+		button.style.opacity = '0'
 	}
 
 	const createTaskButton = () => {
@@ -67,7 +81,8 @@ const domModule = (function(){
 			projectTitle.addEventListener('click', function(){
 				eventModule.switchProject(projectTitle)
 				renderAll()
-				closeProjectForm()
+				closeForm(projectForm, '.projectInput', projectFormButton)
+				closeForm(taskForm, '.taskInput', taskFormButton)
 			})
 
 			deleteProject.addEventListener('click', function(){
@@ -140,6 +155,7 @@ const domModule = (function(){
 		switch(key){
 			case 'title':
 				element = document.createElement('h3')
+				if(obj[key] == '') obj[key] = 'New Task'
 				element.innerText = obj[key]
 				break;
 			case 'description':
@@ -150,6 +166,7 @@ const domModule = (function(){
 			case 'dueDate':
 				element = document.createElement('p')
 				element.classList.add('dueDate', 'smallInfo', 'hideable')
+				if(obj[key] == '') obj[key] = 'Now'
 				element.innerText = `Due: ${obj[key]}`
 				break;
 			case 'priority':
@@ -166,15 +183,6 @@ const domModule = (function(){
 		}
 			return element
 	}
-
-	const buildAddTaskButton = (div) => {
-		if(!div.querySelector('.taskAdd')){
-			let taskButton = document.createElement('button')
-			taskButton.textContent = 'New Task'
-			taskButton.classList.add('taskAdd')
-			div.appendChild(taskButton)
-		}
-	} 
 		
 	const renderTasks = (project) => {
 		project.tasks.forEach(task => {
@@ -187,7 +195,6 @@ const domModule = (function(){
 			}
 			checkTaskStatus(task, infoDiv)
 			buildIcons(infoDiv)
-			buildAddTaskButton(projectDiv)
 			taskDiv.appendChild(infoDiv)
 		})
 	}
@@ -207,20 +214,31 @@ const domModule = (function(){
 
 
 	projectButton.addEventListener('click', () => {
-		openProjectForm()
+		openForm(projectForm, '.projectInput', projectFormButton)
 	}) 
 
-	formButton.addEventListener('click', () => {
+	projectFormButton.addEventListener('click', () => {
+		let titleInput = projectForm.querySelector('.projectInput')
 		if(projectModule.checkIfNameExists(titleInput.value) || titleInput.value == '') return;
 		else eventModule.buildProject(titleInput.value)
 		renderAll()
-		closeProjectForm()
+		closeForm(projectForm, '.projectInput', projectFormButton)
+		closeForm(taskForm, '.taskInput', taskFormButton)
 	});
 
+	taskButton.addEventListener('click', () => {
+		openForm(taskForm, '.taskInput', taskFormButton, '200px')
+	})
+
+	taskFormButton.addEventListener('click', () => {
+		eventModule.buildTask(...eventModule.getFormValues(taskForm))
+		renderAll();
+		closeForm(projectForm, '.projectInput', projectFormButton)
+		closeForm(taskForm, '.taskInput', taskFormButton)
+	})
+
 	return {
-		renderProjects, 
-		renderTasks,
-		renderAll,
+		renderAll
 	}
 })()
 
