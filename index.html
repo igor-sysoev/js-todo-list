@@ -9,12 +9,25 @@
 	<div class="container">
 		<div id="projectDiv">
 		<div class="heading">
-			<h2>Projects</h2>
-			<i class="fas fa-plus" id="projectAdd"></i>
+			<h2>Todoer</h2>
+			<i class="fas fa-folder-plus" id="projectAdd"></i>
+			<i class="fas fa-plus" id="taskAdd"></i>
 		</div>	
-			<div class="modal">
-				<input type="text" name="formInput" class="formInput" placeholder="New Project">
-				<i class="far fa-plus-square addButton"></i>
+			<div class="modal" id="projectForm">
+				<input type="text" name="formInput" class="projectInput" placeholder="New Project">
+				<i class="far fa-plus-square projectAddButton"></i>
+			</div>
+			<div class="modal" id="taskForm">
+				<input type="text" name="formInput" placeholder="New Task" class="taskInput">
+				<input type="text" name="formInput" placeholder="Description" class="taskInput">
+				<input type="date" name="formInput" placeholder="Due Date" class="taskInput" value="Now">
+				<select class="taskInput" placeholder = 'Priority'>
+					<option value="Standart" selected disabled hidden>Please select an option</option>
+					<option value="High">High</option>
+					<option value="Medium">Medium</option>
+					<option value="Low">Low</option>
+				</select>
+				<i class="far fa-plus-square taskAddButton"></i>
 			</div>
 		</div>
 
